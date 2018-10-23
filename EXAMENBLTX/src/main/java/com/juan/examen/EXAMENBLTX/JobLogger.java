@@ -21,7 +21,6 @@ public class JobLogger {
 		logToDatabase = logToDatabaseParam;
 		logToFile = logToFileParam;
 		logToConsole = logToConsoleParam;
-
 	}
 	
 	public static void LogMessage(String message) throws Exception {
@@ -31,13 +30,6 @@ public class JobLogger {
 			return;
 		}
 
-		if (!logToConsole && !logToFile && !logToDatabase) {
-			throw new Exception("Invalid configuration");
-		}
-		
-		if (!logError && !logMessage && !logWarning) {
-			throw new Exception("Error or Warning or Message must be specified");
-		}
 		
 		if(logError){
 			LOG.error(message);
@@ -70,7 +62,7 @@ public class JobLogger {
 	public static void main(String[] args) {
 		JobLogger log = new JobLogger(false,false,true,false,false,false);
 		try {
-			log.LogMessage("blabalalbalal");
+			log.LogMessage("mensaje 1");
 		} catch (Exception e) {
 			LOG.error(e);
 		}

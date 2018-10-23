@@ -19,6 +19,7 @@ public class JobLoggerTest {
 		System.out.println("Antes de todas");
 		JobLogger jobLogger = new JobLogger(false,true,false,false,false,false);
 	 	try {
+	 		
 			jobLogger.LogMessage("prueba test");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} [%-10t] %-5p (%c{2}:%L) %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="File.log" />
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} [%-10t] %-5p (%c{2}:%L) %m%n" />
+        </layout>
+    </appender>
+    
+	<appender name="BD" class="org.apache.log4j.jdbc.JDBCAppender"> 		
+				<param name="driver" value="com.mysql.jdbc.Driver"/> 
+				<param name="URL" value="jdbc:mysql://localhost:3306/Log?autoReconnect=true"/> 
+				<param name="user" value="root"/> 
+				<param name="password" value=""/> 
+				<param name="sql" value="INSERT INTO Log.ApacheLog4jMysql (Fecha,Clase,Prioridad,Mensaje) 
+											VALUES ( '%n%d{yyyy-MM-dd HH:mm:ss}','%c','%p','%m ')"/> 			
+	</appender>    
+    
+	
+    <root>
+    	<level value="error" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="BD" />
+        
+        <level value="warn" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="BD" />
+        
+        <level value="info" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        
+        <level value="trace" />
+        <appender-ref ref="BD" />
+        
+        <level value="debug" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        
+    </root>
+</log4j:configuration>
